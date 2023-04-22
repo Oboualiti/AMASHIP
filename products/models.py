@@ -28,5 +28,6 @@ class Customer_info(models.Model):
       def __str__(self):
          return (self.full_name +' ' + self.city)
 
-
+class Email(models.Model):
+   email=models.CharField(max_length=50)
          

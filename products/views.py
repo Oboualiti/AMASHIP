@@ -1,9 +1,14 @@
 from django.shortcuts import render,redirect
-from products.models import Products,Customer_info
+from products.models import Products,Customer_info,Email
 from products.forms import *
 import json
 
 def index(request):
+    if request.method == 'POST':
+        email=request.POST.get('email')
+        data=Email(email=email)
+        data.save() 
+        return redirect('/contactus')   
     return render(request, 'index.html', {'pro' : Products.objects.all()})
 
 def done(request):

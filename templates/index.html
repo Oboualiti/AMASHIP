@@ -102,10 +102,12 @@
       <div class="lasttitle"><div>ابق على تواصل معنا </div>
         <p>أحصل على إشعارات بأحدث المنتجات مباشرة في بريدك الالكتروني</p>
       </div>
-      <form class="email">
+
+      <form method="post" class="email">
+        {% csrf_token %}
         <div class="form-group">
    
-          <input type="email" class="form-control mr-5" aria-describedby="emailHelp" placeholder="ادخل البريد الالكتروني ">
+          <input type="email" class="form-control mr-5" aria-describedby="emailHelp" name="email" placeholder="ادخل البريد الالكتروني ">
         </div>
         
         
