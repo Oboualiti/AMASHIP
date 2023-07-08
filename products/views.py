@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from products.models import Products,Customer_info,Email
-from products.forms import *
+from products.models import Products,Email
+
 import json
 
 def index(request):
@@ -8,7 +8,7 @@ def index(request):
         email=request.POST.get('email')
         data=Email(email=email)
         data.save() 
-        return redirect('/contactus')   
+        return redirect('/done')   
     return render(request, 'index.html', {'pro' : Products.objects.all()})
 
 def done(request):
@@ -16,20 +16,13 @@ def done(request):
 
 def product_detial(request , id):
     product_detail=Products.objects.get(id=id)
-    customer = CustomerForm()
     if request.method == 'POST':
-        quantity=request.POST.get('quantity')
-        full_name=request.POST.get('full_name')
-        city=request.POST.get('city')
-        number=request.POST.get('number')
-       
-        myid = request.POST.get('id')
-        id_customer=Customer_info(myid=myid,quantity=quantity,full_name=full_name,city=city,number=number)
-        
-        id_customer.save()
-        return redirect('/done')
-        
-    return render(request, 'products_details.html',{'prod':product_detail,'customer':customer , 'pro':Products.objects.all()})
+        email=request.POST.get('email')
+        data=Email(email=email)
+        data.save() 
+        return redirect('/done') 
+      
+    return render(request, 'products_details.html',{'prod':product_detail, 'pro':Products.objects.all()})
 
 def conditions(request):
     return render(request,'conditions_general.html' , {'conditions':'conditions'})
